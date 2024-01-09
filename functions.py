@@ -1,3 +1,4 @@
+#v1
 import os
 import time
 import shutil
@@ -16,6 +17,7 @@ def move_file(source_path, destination_directory):
 def detect_changes(directory, move_directory):
     # Get the initial list of files in the directory
     files_before = list_files(directory)
+    video_extensions = ['mov']
     audio_extensions = ['mp3', 'mp4', 'wav']
     image_extensions = ['jpeg', 'png', 'jpg', 'arw']
     pdf_extensions = ['pdf']
@@ -39,6 +41,8 @@ def detect_changes(directory, move_directory):
                   file_extension  = file.split(".")[-1].lower()
                   if file_extension in audio_extensions:
                       move_file(file, move_directory + "/Audio")
+                  elif file_extension.lower() in video_extensions:
+                    move_file(file, move_directory + "/Videos")
                   elif file_extension.lower() in image_extensions:
                       move_file(file, move_directory + "/Images")
                   elif file_extension.lower() in pdf_extensions:
